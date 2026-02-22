@@ -6,10 +6,17 @@ import './globals.css'
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'site';
+const isProd = process.env.NODE_ENV === 'production';
+
 export const metadata: Metadata = {
   title: 'Nehal | Aspiring Cybersecurity Professional',
   description: 'Den Haag-based cybersecurity candidate with 20+ years of IT infrastructure expertise, CompTIA Security+ certified, transitioning into cybersecurity.',
   generator: 'v0.app',
+  // ensure absolute icon URLs include the base path when deployed
+  metadataBase: isProd
+    ? new URL(`https://sabyasachisabs.github.io/${repoName}`)
+    : undefined,
   icons: {
     icon: [
       {
